@@ -1,0 +1,30 @@
+<!-- This is a launch file that runs the bare minimum requirements to get -->
+<!-- gazebo running.  It requires a relative_nav::Command on /command -->
+<!-- to move the hex, and outputs imu, altimeter, laserscan and RGBD images -->
+<!-- as well as a relative_nav::FilterState message on /global_state  -->
+<!-- a geometry_msgs::StampedTransform on /mocap to imitate motion capture -->
+
+
+<launch>
+  <arg name="world_file" default="platform.world"/>
+
+  <!-- Start Simulator -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find desktopquad_sim)/worlds/$(arg world_file)"/>
+    <arg name="gui" value="true"/>
+    <arg name="paused" value="true"/>
+  </include>
+
+  <!-- Spawn the desktop quad -->
+  <include file="$(find desktopquad_sim)/launch/multirotor.launch">
+    <arg name="mav_name"            value="chiny"/>
+    <arg name="model_name"          value="chiny"/>
+    <arg name="enable_ground_truth" value="true" />
+    <arg name="color"               value="White"/>
+    <arg name="x"                   value="0"/>
+    <arg name="y"                   value="0"/>
+    <arg name="z"                   value="0.1"/>
+    <arg name="yaw"                 value="0"/>
+  </include>
+
+</launch>
