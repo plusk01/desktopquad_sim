@@ -1,5 +1,5 @@
 waypoints:
- [[0, 0, -0.15]]
+ [[0, 0, -0.10]]
 
 threshold: 0.05
 cyle: True
