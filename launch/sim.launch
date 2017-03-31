@@ -24,7 +24,7 @@
     <arg name="x"                   value="0"/>
     <arg name="y"                   value="0"/>
     <arg name="z"                   value="1.055"/>
-    <arg name="yaw"                 value="0"/>
+    <arg name="yaw"                 value="-1.5708"/>
   </include>
 
 </launch>
