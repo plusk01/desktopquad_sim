@@ -411,6 +411,31 @@
         </surface>
       </collision>
     </link>
+    <link name='link'>
+        <pose frame=''>0 0 0.407 3.14159 0 -1.5708</pose>
+        <collision name ='collision'>
+            <geometry>
+                <box>
+                    <size>0.2159 0.2794 0.001</size>
+                </box>
+            </geometry>
+        </collision>
+        <visual name='visual'>
+            <geometry>
+                <box>
+                    <size>0.2159 0.2794 0.001</size>
+                </box>
+            </geometry>
+
+            <material>
+                <script>
+                    <uri>model://at36h11_mosaic/materials/scripts</uri>
+                    <uri>model://at36h11_mosaic/materials/textures</uri>
+                    <name>at36h11_mosaic/Diffuse</name>
+                </script>
+            </material>
+        </visual>
+    </link>     
     <joint name='link_1_0_JOINT_1' type='fixed'>
       <parent>link_1_0</parent>
       <child>link_1</child>
@@ -479,6 +504,23 @@
         </ode>
       </physics>
     </joint>
+    <joint name='link_JOINT_0' type='fixed'>
+          <parent>link</parent>
+          <child>link_1_clone</child>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <physics>
+            <ode>
+              <limit>
+                <cfm>0</cfm>
+                <erp>0.2</erp>
+              </limit>
+              <suspension>
+                <cfm>0</cfm>
+                <erp>0.2</erp>
+              </suspension>
+            </ode>
+          </physics>
+        </joint>
     <static>0</static>
     <allow_auto_disable>1</allow_auto_disable>
   </model>
