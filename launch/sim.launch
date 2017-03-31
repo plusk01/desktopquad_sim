@@ -27,4 +27,9 @@
     <arg name="yaw"                 value="-1.5708"/>
   </include>
 
+  <!-- plot using pyqtgraph (make sure simulator gui is turned off)-->
+  <node pkg="desktopquad_sim" type="state_plotter.py" name="state_plotter" output="screen">
+    <param name="time_window" value="100.0"/>
+  </node>
+
 </launch>
