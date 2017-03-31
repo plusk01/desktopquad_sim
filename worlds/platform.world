@@ -8,18 +8,18 @@
       <uri>model://sun</uri>
     </include>
 
-    <model name="table">
+<!--     <model name="table">
       <include>
         <uri>model://table</uri>
       </include>
-      <pose>0.4 0 0 0 0 0</pose>
-    </model>
+      <pose>0.4 0 .002 0 0 0</pose>
+    </model> -->
 
     <model name="platform">
       <include>
         <uri>model://desktopquad</uri>
       </include>
-      <pose>0 0 1.022497 0 0 0</pose>
+      <pose>0 0 0.0075 0 0 0</pose>
     </model>
 
 
