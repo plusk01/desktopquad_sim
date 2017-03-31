@@ -8,10 +8,19 @@
       <uri>model://sun</uri>
     </include>
 
+    <model name="table">
+      <include>
+        <uri>model://table</uri>
+      </include>
+      <pose>0.4 0 0 0 0 0</pose>
+    </model>
 
-    <include>
-      <uri>model://desktopquad</uri>
-    </include>
+    <model name="platform">
+      <include>
+        <uri>model://desktopquad</uri>
+      </include>
+      <pose>0 0 1.022497 0 0 0</pose>
+    </model>
 
 
     <physics type='ode'>
