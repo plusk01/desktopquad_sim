@@ -83,4 +83,21 @@ Author: James Jackson
     <origin xyz="0 0 0" rpy="0 -1.5707 0"/>
   </xacro:simple_camera>
 
+  <!-- to visualize the camera's pose: -->
+  <!--     put the <visual> tag in the -->
+  <!--     camera.xacro as shown below -->
+<!--   <link name="${namespace}/camera_base_link">
+    <inertial>
+      <mass value="0.001"/>
+      <xacro:insert_block name="origin"/>
+      <xacro:insert_block name="empty_inertia"/>
+    </inertial>
+    <visual name="${namespace}/camera_visual">
+      <xacro:insert_block name="origin"/>
+      <geometry>
+        <sphere radius="0.009"/>
+      </geometry>
+    </visual>
+  </link> -->
+
 </robot>
