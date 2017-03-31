@@ -20,7 +20,7 @@
     <arg name="mav_name"            value="chiny"/>
     <arg name="model_name"          value="chiny"/>
     <arg name="enable_ground_truth" value="true" />
-    <arg name="color"               value="White"/>
+    <arg name="color"               value="Black"/>
     <arg name="x"                   value="0"/>
     <arg name="y"                   value="0"/>
     <arg name="z"                   value="0.1"/>
