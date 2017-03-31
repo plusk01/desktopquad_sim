@@ -6,6 +6,7 @@ import pyqtgraph as pg
 from std_msgs.msg import Float64
 from nav_msgs.msg import Odometry
 from sensor_msgs.msg import Imu
+from fcu_common.msg import Command
 
 # Enable antialiasing for prettier plots
 pg.setConfigOptions(antialias=True)
@@ -23,11 +24,12 @@ class Plotter:
         # rospy.Subscriber('/mav0/estimate/bias', Imu, self.biasCallback)
         # rospy.Subscriber('/mav0/estimate/drag', Float64, self.dragCallback)
         rospy.Subscriber('/chiny/ground_truth/odometry', Odometry, self.truthCallback)
+        rospy.Subscriber('/chiny/high_level_command', Command, self.cmdCallback)
 
         # initialize Qt gui application and window
         self.app = pg.QtGui.QApplication([])
         self.w = pg.GraphicsWindow(title='States vs Time')
-        self.w.resize(1000,800)
+        self.w.resize(1000, 800)
 
         # initialize plots in one window
         self.p_pn = self.w.addPlot()
@@ -118,6 +120,19 @@ class Plotter:
         self.c_az_e = self.p_az.plot()
         self.c_mu_e = self.p_mu.plot()
 
+        self.c_pn_d = self.p_pn.plot(name='desired')
+        self.c_pe_d = self.p_pe.plot()
+        self.c_pd_d = self.p_pd.plot()
+        self.c_u_d = self.p_phi.plot()
+        self.c_v_d = self.p_theta.plot()
+        self.c_w_d = self.p_psi.plot()
+        self.c_phi_d = self.p_u.plot()
+        self.c_theta_d = self.p_v.plot()
+        self.c_psi_d = self.p_w.plot()
+        self.c_p_d = self.p_p.plot()
+        self.c_q_d = self.p_q.plot()
+        self.c_r_d = self.p_r.plot()
+
         # initialize state variables
         self.time_t = 0
         self.pn_t = 0
@@ -160,19 +175,36 @@ class Plotter:
         self.az_e = 0
         self.mu_e = 0
 
+        self.time_d = 0
+        self.pn_d = 0
+        self.pe_d = 0
+        self.pd_d = 0
+        self.u_d = 0
+        self.v_d = 0
+        self.w_d = 0
+        self.phi_d = 0
+        self.theta_d = 0
+        self.psi_d = 0
+        self.p_d = 0
+        self.q_d = 0
+        self.r_d = 0
+
         # truth/estimate storage lists
         self.estimates = []
         self.truths = []
+        self.desired = []
 
         # curve lists
         self.c_list_t = [self.c_pn_t, self.c_pe_t, self.c_pd_t, self.c_u_t, self.c_v_t, self.c_w_t, self.c_phi_t, self.c_theta_t, self.c_psi_t, self.c_p_t, self.c_q_t, self.c_r_t, self.c_gx_t, self.c_gy_t, self.c_gz_t, self.c_ax_t, self.c_ay_t, self.c_az_t]
         self.c_list_e = [self.c_pn_e, self.c_pe_e, self.c_pd_e, self.c_u_e, self.c_v_e, self.c_w_e, self.c_phi_e, self.c_theta_e, self.c_psi_e, self.c_p_e, self.c_q_e, self.c_r_e, self.c_gx_e, self.c_gy_e, self.c_gz_e, self.c_ax_e, self.c_ay_e, self.c_az_e, self.c_mu_e]
+        self.c_list_d = [self.c_pn_d, self.c_pe_d, self.c_pd_d, self.c_u_d, self.c_v_d, self.c_w_d, self.c_phi_d, self.c_theta_d, self.c_psi_d, self.c_p_d, self.c_q_d, self.c_r_d]
 
     # method for updating each states
     def update(self):
         # pack stored data into lists
         self.truths.append([self.time_t, self.pn_t, self.pe_t, self.pd_t, self.phi_t, self.theta_t, self.psi_t, self.u_t, self.v_t, self.w_t, self.p_t, self.q_t, self.r_t, self.gx_t, self.gy_t, self.gz_t, self.ax_t, self.ay_t, self.az_t])
         self.estimates.append([self.time_e, self.pn_e, self.pe_e, self.pd_e, self.phi_e, self.theta_e, self.psi_e, self.u_e, self.v_e, self.w_e, self.p_e, self.q_e, self.r_e, self.gx_e, self.gy_e, self.gz_e, self.ax_e, self.ay_e, self.az_e, self.mu_e])
+        self.desired.append([self.time_d, self.pn_d, self.pe_d, self.pd_d, self.phi_d, self.theta_d, self.psi_d, self.u_d, self.v_d, self.w_d, self.p_d, self.q_d, self.r_d])
 
         # discard data outside desired plot time window
         for i in range(0,1000):
@@ -180,6 +212,8 @@ class Plotter:
                 self.truths.pop(0)
             if self.estimates[0][0] < self.estimates[-1][0] - self.t_win:
                 self.estimates.pop(0)
+            if self.desired[0][0] < self.desired[-1][0] - self.t_win:
+                self.desired.pop(0)
         
         # stack the data lists
         truths_array = np.vstack(self.truths)
@@ -188,13 +222,20 @@ class Plotter:
         estimates_array = np.vstack(self.estimates)
         time_e_array = estimates_array[:,0]
 
+        desired_array = np.vstack(self.desired)
+        time_d_array = desired_array[:,0]
+
         # set the truth states
-        for i in range(0,len(self.c_list_t)):
+        for i in xrange(0,len(self.c_list_t)):
 	        self.c_list_t[i].setData(time_t_array, truths_array[:,i+1], pen=(255,0,0))
 
         # set the estimated states
-        for i in range(0,len(self.c_list_e)):
-	        self.c_list_e[i].setData(time_e_array, estimates_array[:,i+1], pen=(0,255,0))
+        for i in xrange(0,len(self.c_list_e)):
+            self.c_list_e[i].setData(time_e_array, estimates_array[:,i+1], pen=(0,255,0))
+
+        # set the desired states
+        for i in xrange(0,len(self.c_list_d)):
+            self.c_list_d[i].setData(time_d_array, desired_array[:,i+1], pen=(0,0,255))
 
         # update the plotted data
         self.app.processEvents()
@@ -272,6 +313,15 @@ class Plotter:
 
     def dragCallback(self, msg):
         self.mu_e = msg.data
+
+    def cmdCallback(self, msg):
+        self.pn_d = msg.x
+        self.pe_d = msg.y
+        self.pd_d = msg.F
+        self.psi_d = msg.z
+
+        # unpack time
+        self.time_d = msg.header.stamp.to_sec()
 
 
 ################################################################################
