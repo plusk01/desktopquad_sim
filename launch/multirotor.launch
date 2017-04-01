@@ -35,6 +35,12 @@
       <param name="euler_integration_steps" value="20"/>
     </node>-->
 
+    <!-- AprilTags VO -->
+    <node name="apriltagvo" pkg="apriltagvo" type="apriltagvo" output="screen">
+      <param name="show_output_video" value="true" />
+      <remap from="input_image" to="camera/rgb" />
+    </node>
+
     <!-- PID Position Controller -->
     <rosparam command="load" file="$(find desktopquad_sim)/agents/$(arg model_name)/$(arg model_name)_controller.yaml" ns="controller"/>
     <node name="controller" pkg="ros_copter" type="controller" output="screen">
