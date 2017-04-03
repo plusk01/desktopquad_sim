@@ -411,27 +411,30 @@
         </surface>
       </collision>
     </link>
-    <link name='link'>
-        <pose frame=''>0 0 0.407 3.14159 0 -1.5708</pose>
+    <link name='aruco_tags'>
+        <!-- I compared the Gazebo model with a piece a paper, noted where the z-axis went through the middle -->
+        <!-- marker, and then measured a printed version of the marker map and found the necessary (x,y) offsets -->
+        <!-- that would put the center of the middle ArUco tag in the center of Gazebo -->
+        <pose frame=''>-0.004 0 0.407 3.14159 0 0</pose>
         <collision name ='collision'>
             <geometry>
                 <box>
-                    <size>0.2159 0.2794 0.001</size>
+                    <size>0.2794 0.2159 0.001</size>
                 </box>
             </geometry>
         </collision>
         <visual name='visual'>
             <geometry>
                 <box>
-                    <size>0.2159 0.2794 0.001</size>
+                    <size>0.2794 0.2159 0.001</size>
                 </box>
             </geometry>
 
             <material>
                 <script>
-                    <uri>model://at36h11_mosaic/materials/scripts</uri>
-                    <uri>model://at36h11_mosaic/materials/textures</uri>
-                    <name>at36h11_mosaic/Diffuse</name>
+                    <uri>model://aruco_mip_36h12_markermap/materials/scripts</uri>
+                    <uri>model://aruco_mip_36h12_markermap/materials/textures</uri>
+                    <name>aruco_mip_36h12_markermap/Diffuse</name>
                 </script>
             </material>
         </visual>
