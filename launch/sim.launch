@@ -32,4 +32,7 @@
     <param name="time_window" value="100.0"/>
   </node>
 
+  <!-- Load Rviz to see the tf tree -->
+  <node pkg="rviz" type="rviz" name="rviz" args="$(find desktopquad_sim)/rviz/quad.rviz" />
+
 </launch>
