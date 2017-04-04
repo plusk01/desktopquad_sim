@@ -38,6 +38,9 @@
     <!-- ArUco Localization -->
     <node name="aruco" pkg="aruco_localization" type="aruco_localization" output="screen">
       <param name="show_output_video" value="true" />
+      <param name="markermap_config" value="$(find desktopquad_sim)/params/aruco_mip_36h12_markermap.yaml" />
+      <param name="marker_size" value="0.0298" />
+
       <remap from="input_image" to="camera/rgb" />
     </node>
 
