@@ -35,8 +35,8 @@
       <param name="euler_integration_steps" value="20"/>
     </node>-->
 
-    <!-- AprilTags VO -->
-    <node name="aprilvo" pkg="aprilvo" type="aprilvo" output="screen">
+    <!-- ArUco Localization -->
+    <node name="aruco" pkg="aruco_localization" type="aruco_localization" output="screen">
       <param name="show_output_video" value="true" />
       <remap from="input_image" to="camera/rgb" />
     </node>

@@ -1,7 +1,7 @@
 <?xml version='1.0'?>
 <sdf version='1.6'>
   <model name='desktopquad'>
-    <link name='link_1'>
+    <link name='base_link'>
       <pose frame=''>0 0 0 0 -0 0</pose>
       <inertial>
         <mass>1</mass>
@@ -292,7 +292,7 @@
         </surface>
       </collision>
     </link>
-    <link name='link_1_clone'>
+    <link name='top_link'>
       <pose frame=''>-0 0 0.4094 -2e-06 -3e-06 -0.000416</pose>
       <inertial>
         <mass>0.05</mass>
@@ -309,7 +309,7 @@
       <self_collide>0</self_collide>
       <kinematic>0</kinematic>
       <gravity>1</gravity>
-      <visual name='ModelPreview_30::link_1_clone::visual_1'>
+      <visual name='ModelPreview_30::top_link::visual_1'>
         <geometry>
           <box>
             <size>0.3 0.25 0.003</size>
@@ -441,7 +441,7 @@
     </link>     
     <joint name='link_1_0_JOINT_1' type='fixed'>
       <parent>link_1_0</parent>
-      <child>link_1</child>
+      <child>base_link</child>
       <pose frame=''>0 0 0 0 -0 0</pose>
       <physics>
         <ode>
@@ -458,7 +458,7 @@
     </joint>
     <joint name='link_1_0_JOINT_3' type='fixed'>
       <parent>link_1_0</parent>
-      <child>link_1_clone</child>
+      <child>top_link</child>
       <pose frame=''>0 0 0 0 -0 0</pose>
       <physics>
         <ode>
@@ -475,7 +475,7 @@
     </joint>
     <joint name='link_1_0_clone_JOINT_0' type='fixed'>
       <parent>link_1_0_clone</parent>
-      <child>link_1</child>
+      <child>base_link</child>
       <pose frame=''>0 0 0 0 -0 0</pose>
       <physics>
         <ode>
@@ -492,7 +492,7 @@
     </joint>
     <joint name='link_1_0_clone_JOINT_2' type='fixed'>
       <parent>link_1_0_clone</parent>
-      <child>link_1_clone</child>
+      <child>top_link</child>
       <pose frame=''>0 0 0 0 -0 0</pose>
       <physics>
         <ode>
@@ -507,9 +507,9 @@
         </ode>
       </physics>
     </joint>
-    <joint name='link_JOINT_0' type='fixed'>
-          <parent>link</parent>
-          <child>link_1_clone</child>
+    <joint name='aruco_tags_JOINT_0' type='fixed'>
+          <parent>aruco_tags</parent>
+          <child>top_link</child>
           <pose frame=''>0 0 0 0 -0 0</pose>
           <physics>
             <ode>
