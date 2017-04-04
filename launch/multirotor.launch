@@ -36,7 +36,7 @@
     </node>-->
 
     <!-- AprilTags VO -->
-    <node name="apriltagvo" pkg="apriltagvo" type="apriltagvo" output="screen">
+    <node name="aprilvo" pkg="aprilvo" type="aprilvo" output="screen">
       <param name="show_output_video" value="true" />
       <remap from="input_image" to="camera/rgb" />
     </node>
