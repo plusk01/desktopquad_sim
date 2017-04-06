@@ -415,7 +415,7 @@
         <!-- I compared the Gazebo model with a piece a paper, noted where the z-axis went through the middle -->
         <!-- marker, and then measured a printed version of the marker map and found the necessary (x,y) offsets -->
         <!-- that would put the center of the middle ArUco tag in the center of Gazebo -->
-        <pose frame=''>-0.004 0 0.407 3.14159 0 0</pose>
+        <pose frame=''>-0.004 0 0.407 3.14159 0 3.14159</pose>
         <collision name ='collision'>
             <geometry>
                 <box>

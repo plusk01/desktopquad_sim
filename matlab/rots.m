@@ -8,17 +8,40 @@ function rots
     
     % Plot the world coordinate system
     figure(1), clf;
-    plotAxes(CX, CY, CZ);
-    plotAxes(CX, CY, CZ, [-2 -2 -2]);
-    axis([-1 1 -1 1 -1 1]*2);
-    
+%     plotAxes(CX, CY, CZ);
+    a = 5;
+    plotAxes(CX, CY, CZ, [-1 -1 -1]*a);
+    axis([-1 1 -1 1 -1 1]*a);
+      
     % Base tf
-    rot = rotx(180)*roty(0)*rotz(0);
+%     q = eul2quat(deg2rad(fliplr([180 0 0]))); % rpy
+    rot = rotx(90)'*rotz(180);
+%     rot = quat2rotm(q);
     CXr = rot*CX;
     CYr = rot*CY;
     CZr = rot*CZ;
-    T = [0 0 .4];
-    plotAxes(CXr, CYr, CZr, T, '--')
+    T = [0 0 -(a-1)];
+    plotAxes(CXr, CYr, CZr, T)
+    
+%     % ArUco (from top)
+%     q = quatmultiply(q, eul2quat(deg2rad(fliplr([0 0 -90])))); % rpy
+%     %rot = rotx(180)*roty(0)*rotz(0);
+%     rot = quat2rotm(q);
+%     CXr = rot*CX;
+%     CYr = rot*CY;
+%     CZr = rot*CZ;
+%     T = [0 0 -(a-2.2)];
+%     plotAxes(CXr, CYr, CZr, T)
+%     
+%     % Camera (from top)
+%     q = quatmultiply(q, eul2quat(deg2rad(fliplr([180 0 -90])))); % rpy
+%     %rot = rotx(180)*roty(0)*rotz(0);
+%     rot = quat2rotm(q);
+%     CXr = rot*CX;
+%     CYr = rot*CY;
+%     CZr = rot*CZ;
+%     T = [0 0 -(a-3.4)];
+%     plotAxes(CXr, CYr, CZr, T)
 
 end
 
