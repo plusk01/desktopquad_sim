@@ -1,5 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- This spawns an MAV and runs all nodes associated with the MAV -->
-
 <launch>
   <arg name="mav_name"            default="mav0"/>
   <arg name="model_name"          default="chiny"/>
@@ -46,12 +46,12 @@
 
     <!-- PID Position Controller -->
     <rosparam command="load" file="$(find desktopquad_sim)/agents/$(arg model_name)/$(arg model_name)_controller.yaml" ns="controller"/>
-    <node name="controller" pkg="ros_copter" type="controller" output="screen">
+    <node name="controller" pkg="desktopquad" type="controller" output="screen">
       <remap from="estimate" to="ground_truth/odometry"/>
     </node>
 
     <!-- Waypoint Manager -->
-    <node name="waypoint_manager" pkg="ros_copter" type="waypoint_manager.py" output="screen">
+    <node name="waypoint_manager" pkg="desktopquad" type="waypoint_manager.py" output="screen">
       <rosparam command="load" file="$(find desktopquad_sim)/params/waypoints.yaml"/>
       <remap from="waypoint" to="high_level_command"/>
       <remap from="state" to="ground_truth/odometry"/>

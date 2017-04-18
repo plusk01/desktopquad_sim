@@ -8,7 +8,7 @@ Panels:
         - /Status1
         - /world1
         - /aruco1
-        - /ground_truth1
+        - /chiny/truth1
         - /camera1
         - /body1
         - /base1
@@ -69,26 +69,26 @@ Visualization Manager:
       Reference Frame: aruco
       Value: true
     - Class: rviz/Axes
-      Enabled: false
-      Length: 0.100000001
-      Name: ground_truth
-      Radius: 0.00999999978
-      Reference Frame: chiny/ground_truth
-      Value: false
-    - Class: rviz/Axes
       Enabled: true
       Length: 0.100000001
-      Name: camera
+      Name: chiny/truth
       Radius: 0.00999999978
-      Reference Frame: camera
+      Reference Frame: chiny/truth
       Value: true
     - Class: rviz/Axes
       Enabled: false
       Length: 0.100000001
+      Name: camera
+      Radius: 0.00999999978
+      Reference Frame: camera
+      Value: false
+    - Class: rviz/Axes
+      Enabled: true
+      Length: 0.100000001
       Name: body
       Radius: 0.00999999978
       Reference Frame: chiny
-      Value: false
+      Value: true
     - Class: rviz/Axes
       Enabled: true
       Length: 0.100000001
@@ -127,17 +127,17 @@ Visualization Manager:
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0.0396824293
-        Y: -0.129747942
-        Z: 0.185840473
+        X: 0.105924875
+        Y: -0.166131839
+        Z: 0.163984299
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.0500000007
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 0.874797225
+      Pitch: 0.794797838
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 4.56357384
+      Yaw: 4.40856552
     Saved: ~
 Window Geometry:
   Displays:
@@ -155,5 +155,5 @@ Window Geometry:
   Views:
     collapsed: true
   Width: 1200
-  X: 2590
+  X: 2400
   Y: 199
